@@ -1517,10 +1517,15 @@ SimpleMDE.prototype.render = function(el) {
 		backdrop = options.parsingConfig;
 		backdrop.name = "gfm";
 		backdrop.gitHubSpice = false;
-
-		CodeMirrorSpellChecker({
+		var spellCheckerOptions = {
 			codeMirrorInstance: CodeMirror
-		});
+		};
+		if ( typeof options.spellChecker === 'object' ) {
+			spellCheckerOptions = _mergeProperties(spellCheckerOptions, options.spellChecker);
+			console.log("SimpleMDE: spellCheckerOptions");
+			console.log(spellCheckerOptions);
+		}
+		CodeMirrorSpellChecker(spellCheckerOptions);
 	} else {
 		mode = options.parsingConfig;
 		mode.name = "gfm";
